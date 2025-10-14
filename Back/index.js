@@ -14,21 +14,26 @@ const port = process.env.PORT || 4000;
 const app = express();
 
 
+mongoose.connect(
+        `${process.env.MONGOURL}`
 
+    ).then(async () => {
+        console.log("Connected!");
 
+        const db = mongoose.connection.db;
+        try {
+            await db.collection('users').dropIndex('phone_1');
+            console.log(" Dropped existing index 'phone_1' ");
+        } catch(err){
+            console.log("ℹNo existing 'phone_1' to drop. " );
+        }
+            await db.collection('users').createIndex(
+                { phone: 1 },
+                { unique : true , partialFilterExpression: { phone : { $type : "string" } } }
+            );
+            console.log(" Partial unique index created on 'phone' ");
+    }).catch( err => console.log("Error , Not connected!" , err));
 
-
-(async () => {
-  try {
-    await connectDB(process.env.MONGO_URI);
-    app.listen(PORT, () => {
-      console.log(`API server listening on port ${PORT}`);
-    });
-  } catch (err) {
-    console.error('Failed to start server:', err);
-    process.exit(1);
-  }
-})();
 
 
 
