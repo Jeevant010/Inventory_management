@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ErrorAlert from '../../components/ErrorAlert.jsx';
 import { createSubstationType, getSubstationType, updateSubstationType } from '../../api/substationTypes.js';
-import { PURPOSES, TECHNOLOGIES, BUSBAR_SCHEMES } from '../../constants.js';
+import { PURPOSES, TECHNOLOGIES, BUSBAR_SCHEMES } from '../../../constants.js';
 
 const initial = {
   code: '',

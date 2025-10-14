@@ -5,7 +5,6 @@ const morgan = require('morgan');
 const cors = require('cors');
 const compression = require('compression');
 
-const connectDB = require('./config/db');
 const routes = require('./routes');
 
 const port = process.env.PORT || 4000;

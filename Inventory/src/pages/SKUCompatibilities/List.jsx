@@ -5,7 +5,7 @@ import Pagination from '../../components/Pagination.jsx';
 import ConfirmDelete from '../../components/ConfirmDelete.jsx';
 import ErrorAlert from '../../components/ErrorAlert.jsx';
 import Loading from '../../components/Loading.jsx';
-import { listSKUComps, deleteSKUComp } from '../../api/skuCompatibilities.js';
+import { listSKUComps, deleteSKUComp } from '../../api/skuCompatibility.js';
 
 export default function SKUCompList() {
   const [items, setItems] = useState([]);

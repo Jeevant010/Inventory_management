@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ErrorAlert from '../../components/ErrorAlert.jsx';
 import { createAsset, getAsset, updateAsset } from '../../api/assets.js';
-import { ASSET_TYPES, ASSET_STATUS } from '../../constants.js';
+import { ASSET_TYPES, ASSET_STATUS } from '../../../constants.js';
 
 const initial = {
   asset_type: 'TOWER',

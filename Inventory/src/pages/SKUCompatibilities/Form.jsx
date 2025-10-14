@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ErrorAlert from '../../components/ErrorAlert.jsx';
-import { createSKUComp, getSKUComp, updateSKUComp } from '../../api/skuCompatibilities.js';
+import { createSKUComp, getSKUComp, updateSKUComp } from '../..//api/skuCompatibility.js';
 import { listSKUs } from '../../api/skus.js';
 
 const initial = {

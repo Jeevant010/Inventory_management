@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ErrorAlert from '../../components/ErrorAlert.jsx';
 import { createSKU, getSKU, updateSKU } from '../../api/skus.js';
-import { SKU_CATEGORIES, COMPAT_ASSET_TYPES } from '../../constants.js';
+import { SKU_CATEGORIES, COMPAT_ASSET_TYPES } from '../../../constants.js';
 
 const initial = {
   sku_code: '',

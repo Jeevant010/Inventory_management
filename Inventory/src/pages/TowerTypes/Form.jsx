@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ErrorAlert from '../../components/ErrorAlert.jsx';
 import { createTowerType, getTowerType, updateTowerType } from '../../api/towerTypes.js';
-import { STRUCTURE_FORMS, TOWER_FUNCTIONS } from '../../constants.js';
+import { STRUCTURE_FORMS, TOWER_FUNCTIONS } from '../../../constants.js';
 
 const initial = {
   code: '',
