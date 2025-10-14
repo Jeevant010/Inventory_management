@@ -12,10 +12,10 @@ const SKUSchema = new Schema(
     description: { type: String, required: true },
     category: { type: String, enum: SKU_CATEGORIES, required: true },
     compatible_asset_type: { type: String, enum: COMPAT_ASSET_TYPES, required: true },
-    compatible_type_codes: [{ type: String }], // e.g., ['LAT-SUSP-132', 'AIS-STEPDOWN-132/33']
+    compatible_type_codes: [{ type: String }],
     voltage_min_kv: { type: Number },
     voltage_max_kv: { type: Number },
-    specs: { type: Map, of: String }, // arbitrary key/value specs (dimension, material, etc.)
+    specs: { type: Map, of: String },
     uom: { type: String, default: 'EA' },
     serialization_required: { type: Boolean, default: false },
     lot_controlled: { type: Boolean, default: false },
@@ -29,3 +29,5 @@ const SKUSchema = new Schema(
 
 SKUSchema.index({ category: 1, compatible_asset_type: 1 });
 module.exports = model('SKU', SKUSchema);
+module.exports.SKU_CATEGORIES = SKU_CATEGORIES;
+module.exports.COMPAT_ASSET_TYPES = COMPAT_ASSET_TYPES;

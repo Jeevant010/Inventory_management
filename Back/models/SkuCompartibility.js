@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema, model, Types } = mongoose;
 
-// Fine-grained compatibility constraints per SKU and type_code
 const SKUCompatibilitySchema = new Schema(
   {
     sku: { type: Types.ObjectId, ref: 'SKU', required: true, index: true },
@@ -9,10 +8,7 @@ const SKUCompatibilitySchema = new Schema(
     constraints: {
       type: Map,
       of: String
-      // examples:
-      // "circuit_requirement": "DOUBLE",
-      // "min_kv": "220",
-      // "technology": "GIS"
+      // e.g., circuit_requirement: "DOUBLE", min_kv: "220", technology: "GIS"
     }
   },
   { timestamps: true }

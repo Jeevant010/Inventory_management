@@ -11,8 +11,8 @@ const SubstationTypeSchema = new Schema(
     purpose: { type: String, enum: PURPOSES, required: true },
     technology: { type: String, enum: TECHNOLOGIES, required: true },
     busbar_scheme: { type: String, enum: BUSBAR_SCHEMES },
-    voltage_high_kv: { type: Number, required: true }, // e.g., 132
-    voltage_low_kv: { type: Number }, // e.g., 33; optional for switching-only
+    voltage_high_kv: { type: Number, required: true },
+    voltage_low_kv: { type: Number },
     capacity_mva_min: { type: Number },
     capacity_mva_max: { type: Number },
     bays_in: { type: Number, default: 0 },
@@ -24,3 +24,6 @@ const SubstationTypeSchema = new Schema(
 
 SubstationTypeSchema.index({ technology: 1, purpose: 1, voltage_high_kv: 1, voltage_low_kv: 1 });
 module.exports = model('SubstationType', SubstationTypeSchema);
+module.exports.PURPOSES = PURPOSES;
+module.exports.TECHNOLOGIES = TECHNOLOGIES;
+module.exports.BUSBAR_SCHEMES = BUSBAR_SCHEMES;

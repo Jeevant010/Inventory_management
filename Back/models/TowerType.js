@@ -12,7 +12,7 @@ const TowerTypeSchema = new Schema(
     circuits_supported: { type: Number, enum: [1, 2], default: 1 },
     voltage_min_kv: { type: Number, required: true },
     voltage_max_kv: { type: Number, required: true },
-    height_class: { type: String }, // optional classification, e.g., H1/H2
+    height_class: { type: String }, // optional
     material_grade: { type: String },
     foundation_type: { type: String },
     design_code: { type: String }, // wind/ice loading standard
@@ -23,3 +23,5 @@ const TowerTypeSchema = new Schema(
 
 TowerTypeSchema.index({ voltage_min_kv: 1, voltage_max_kv: 1 });
 module.exports = model('TowerType', TowerTypeSchema);
+module.exports.STRUCTURE_FORMS = STRUCTURE_FORMS;
+module.exports.TOWER_FUNCTIONS = TOWER_FUNCTIONS;
