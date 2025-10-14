@@ -1,60 +1,67 @@
 const express = require('express');
 require('dotenv').config();
 const helmet = require('helmet');
-const morgan = require('morgan');
 const cors = require('cors');
 const compression = require('compression');
+const mongoose = require('mongoose');
 
-const routes = require('./routes');
+// Inline simple routes
+const routes = (() => {
+  const router = express.Router();
+  router.get('/', (_req, res) => res.json({ message: 'API root' }));
+  // Add more routes or replace with: const routes = require('./routes');
+  return router;
+})();
 
 const port = process.env.PORT || 4000;
-
-
 const app = express();
 
+// ---- Database Connection ----
+mongoose.connect(process.env.MONGO_URI)
+  .then(async () => {
+    console.log("✅ Connected to MongoDB");
 
-mongoose.connect(
-        `${process.env.MONGOURL}`
+    const db = mongoose.connection.db;
 
-    ).then(async () => {
-        console.log("Connected!");
+    try {
+      await db.collection('users').dropIndex('phone_1');
+      console.log("🗑️ Dropped existing index 'phone_1'");
+    } catch (err) {
+      console.log("ℹ️ No existing 'phone_1' index to drop.");
+    }
 
-        const db = mongoose.connection.db;
-        try {
-            await db.collection('users').dropIndex('phone_1');
-            console.log(" Dropped existing index 'phone_1' ");
-        } catch(err){
-            console.log("ℹNo existing 'phone_1' to drop. " );
-        }
-            await db.collection('users').createIndex(
-                { phone: 1 },
-                { unique : true , partialFilterExpression: { phone : { $type : "string" } } }
-            );
-            console.log(" Partial unique index created on 'phone' ");
-    }).catch( err => console.log("Error , Not connected!" , err));
+    await db.collection('users').createIndex(
+      { phone: 1 },
+      { unique: true, partialFilterExpression: { phone: { $type: "string" } } }
+    );
+    console.log("✅ Partial unique index created on 'phone'");
+  })
+  .catch(err => console.error("❌ MongoDB connection error:", err));
 
-
-
-
+// ---- Middleware ----
 app.use(helmet());
 app.use(cors());
 app.use(compression());
-// app.use(express.json({ limit: '2mb' }));
+app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
-// app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
-
-
-app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', uptime: process.uptime() });
-});
+// ---- Routes ----
 app.use('/api', routes);
 
-// Error handlers
+app.get("/", (_req, res) => res.send("It's here!"));
+
+// ---- Error Handling ----
+function notFound(req, res) {
+  res.status(404).json({ error: 'Not Found' });
+}
+
+function errorHandler(err, req, res, next) {
+  console.error("❌ Server Error:", err);
+  res.status(500).json({ error: 'Internal Server Error' });
+}
+
 app.use(notFound);
 app.use(errorHandler);
 
-
-app.get( "/" , (req, res ) => res.send("It's here! ") );
-
-app.listen( port , () => console.log(`Listening on port ${port}`) );
+// ---- Start Server ----
+app.listen(port, () => console.log(`🚀 Server listening on port ${port}`));
