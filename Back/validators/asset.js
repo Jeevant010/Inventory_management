@@ -1,5 +1,5 @@
 const { body } = require('express-validator');
-const { ASSET_TYPES } = require('../models/asset.model');
+const { ASSET_TYPES } = require('../models/asset');
 
 const createAsset = [
   body('asset_type').isIn(ASSET_TYPES),

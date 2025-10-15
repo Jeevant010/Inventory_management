@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const ctrl = require('../controllers/asset');
-const validate = require('../utils/validate');
+const validate = require('../middleware/validate');
 const { objectIdParam, paginationValidators } = require('../validators/common');
 const { createAsset, updateAsset } = require('../validators/asset');
 
