@@ -1,4 +1,4 @@
-const SKU = require('../models/sku.model');
+const SKU = require('../models/sku');
 const {
   buildListHandler,
   buildGetHandler,

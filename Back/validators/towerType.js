@@ -1,5 +1,5 @@
 const { body } = require('express-validator');
-const { STRUCTURE_FORMS, TOWER_FUNCTIONS } = require('../models/towerType.model');
+const { STRUCTURE_FORMS, TOWER_FUNCTIONS } = require('../models/towerType');
 
 const createTowerType = [
   body('code').isString().trim().notEmpty(),

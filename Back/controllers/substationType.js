@@ -1,4 +1,4 @@
-const SubstationType = require('../models/substationType.model');
+const SubstationType = require('../models/substationType');
 const {
   buildListHandler,
   buildGetHandler,

@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const ctrl = require('../controllers/towerType.controller');
+const ctrl = require('../controllers/towerType');
 const validate = require('../middleware/validate');
 const { objectIdParam, paginationValidators } = require('../validators/common');
-const { createTowerType, updateTowerType } = require('../validators/towerType.validators');
+const { createTowerType, updateTowerType } = require('../validators/towerType');
 
 router.get('/', paginationValidators, validate, ctrl.list);
 router.post('/', createTowerType, validate, ctrl.create);

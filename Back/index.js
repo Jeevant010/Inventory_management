@@ -5,13 +5,8 @@ const cors = require('cors');
 const compression = require('compression');
 const mongoose = require('mongoose');
 
-// Inline simple routes
-const routes = (() => {
-  const router = express.Router();
-  router.get('/', (_req, res) => res.json({ message: 'API root' }));
-  // Add more routes or replace with: const routes = require('./routes');
-  return router;
-})();
+// Import your routes folder instead of inline router
+const routes = require('./routes');
 
 const port = process.env.PORT || 4000;
 const app = express();
@@ -46,7 +41,7 @@ app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // ---- Routes ----
-app.use('/api', routes);
+app.use('/api', routes); // Now mounts your real routers
 
 app.get("/", (_req, res) => res.send("It's here!"));
 

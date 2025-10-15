@@ -1,11 +1,11 @@
-const TowerType = require('../models/towerType.model');
+const TowerType = require('../models/towerType');
 const {
   buildListHandler,
   buildGetHandler,
   buildCreateHandler,
   buildUpdateHandler,
   buildDeleteHandler
-} = require('./base.controller');
+} = require('./base');
 
 module.exports = {
   list: buildListHandler(TowerType, 'code'),

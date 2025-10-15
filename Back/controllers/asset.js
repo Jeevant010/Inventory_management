@@ -1,4 +1,4 @@
-const Asset = require('../models/asset.model');
+const Asset = require('../models/asset');
 const {
   buildListHandler,
   buildGetHandler,

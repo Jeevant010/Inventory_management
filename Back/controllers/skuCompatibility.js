@@ -1,4 +1,4 @@
-const SKUCompatibility = require('../models/skuCompatibility.model');
+const SKUCompatibility = require('../models/skuCompatibility');
 const {
   buildListHandler,
   buildGetHandler,
