@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const { notFound, errorHandler } = require('./middleware/error');
 // Import your routes folder instead of inline router
 const routes = require('./routes');
+const sanitizeEmptyStrings = require('./middleware/sanitize');
 
 const port = process.env.PORT || 4000;
 const app = express();
@@ -45,18 +46,10 @@ app.use('/api', routes); // Now mounts your real routers
 
 app.get("/", (_req, res) => res.send("It's here!"));
 
-// ---- Error Handling ----
-function notFound(req, res) {
-  res.status(404).json({ error: 'Not Found' });
-}
-
-function errorHandler(err, req, res, next) {
-  console.error("Server Error:", err);
-  res.status(500).json({ error: 'Internal Server Error' });
-}
 
 app.use(notFound);
 app.use(errorHandler);
+app.use(sanitizeEmptyStrings);
 
 // ---- Start Server ----
 app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));

@@ -62,12 +62,17 @@ export default function SKUForm() {
     setErr(null);
     try {
       const payload = {
-        ...form,
-        voltage_min_kv: form.voltage_min_kv === '' ? undefined : Number(form.voltage_min_kv),
-        voltage_max_kv: form.voltage_max_kv === '' ? undefined : Number(form.voltage_max_kv)
-      };
-      if (isEdit) await updateSKU(id, payload);
-      else await createSKU(payload);
+          ...form,
+          voltage_min_kv: form.voltage_min_kv === '' ? undefined : Number(form.voltage_min_kv),
+          voltage_max_kv: form.voltage_max_kv === '' ? undefined : Number(form.voltage_max_kv),
+          // Only send preferred_vendor_id if it looks like a valid ObjectId
+          preferred_vendor_id:
+            form.preferred_vendor_id && /^[a-f\d]{24}$/i.test(form.preferred_vendor_id)
+              ? form.preferred_vendor_id
+              : undefined
+        };
+        if (isEdit) await updateSKU(id, payload);
+        else await createSKU(payload);
       navigate('/skus');
     } catch (e) {
       setErr(e);
