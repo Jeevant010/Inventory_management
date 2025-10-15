@@ -2,33 +2,35 @@ const asyncHandler = require('../utils/asyncHandler');
 
 function buildListHandler(Model, defaultSort = '-createdAt') {
   return asyncHandler(async (req, res) => {
-    const {
-      page = 1,
-      limit = 20,
-      sort = defaultSort,
-      order = undefined,
-      ...filters
-    } = req.query;
+    const MAX_PAGE_LIMIT = Number(process.env.MAX_PAGE_LIMIT || 1000);
 
-    const parsedSort = order ? `${order === 'desc' ? '-' : ''}${sort}` : sort;
+    const page = Math.max(1, Number(req.query.page || 1));
+    const limit = Math.max(1, Math.min(Number(req.query.limit || 20), MAX_PAGE_LIMIT));
+
+    const sortField = req.query.sort || defaultSort;
+    const order = req.query.order;
+    const parsedSort = order ? `${order === 'desc' ? '-' : ''}${sortField}` : sortField;
+
+    // Remove control params to form filters
+    const { page: _p, limit: _l, sort: _s, order: _o, ...filters } = req.query;
 
     // Clean empty filters
     Object.keys(filters).forEach(k => {
       if (filters[k] === '' || filters[k] === undefined) delete filters[k];
     });
 
-    const skip = (Number(page) - 1) * Number(limit);
+    const skip = (page - 1) * limit;
     const [items, total] = await Promise.all([
-      Model.find(filters).sort(parsedSort).skip(skip).limit(Number(limit)),
+      Model.find(filters).sort(parsedSort).skip(skip).limit(limit),
       Model.countDocuments(filters)
     ]);
 
     res.json({
       data: items,
-      page: Number(page),
-      limit: Number(limit),
+      page,
+      limit,
       total,
-      totalPages: Math.ceil(total / Number(limit))
+      totalPages: Math.ceil(total / limit)
     });
   });
 }

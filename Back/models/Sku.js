@@ -22,7 +22,7 @@ const SKUSchema = new Schema(
     reorder_point: { type: Number, default: 0 },
     min_level: { type: Number, default: 0 },
     max_level: { type: Number, default: 0 },
-    preferred_vendor_id: { type: Types.ObjectId, ref: 'Vendor' }
+    preferred_vendor_id: { type: Types.ObjectId, ref: 'Vendor' } 
   },
   { timestamps: true }
 );

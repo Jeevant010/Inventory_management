@@ -13,7 +13,7 @@ function errorHandler(err, _req, res, _next) {
   // Log minimally to console
   if (process.env.NODE_ENV !== 'test') {
     const code = err.code || err.status || '';
-    console.error('❌ Error:', err.name, code, '-', err.message);
+    console.error('Error:', err.name, code, '-', err.message);
   }
 
   // Validation errors
