@@ -1,4 +1,4 @@
-const Prediction = require('../models/prediction.model');
+const Prediction = require('../models/prediction');
 
 async function list(req, res, next) {
   try {

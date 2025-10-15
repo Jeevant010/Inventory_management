@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const ctrl = require('../controllers/analytics.controller');
+const ctrl = require('../controllers/analytics');
 
 // Overview counts
 router.get('/overview', ctrl.overview);

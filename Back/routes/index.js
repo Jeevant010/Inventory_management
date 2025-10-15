@@ -10,7 +10,7 @@ router.use('/assets', require('./assets'));
 
 router.use('/analytics', require('./analytics'));
 router.use('/ml', require('./ml'));
-router.use('/predictions', require('./predictions'));
+router.use('/predictions', require('./prediction'));
 
 // Debug: list all registered routes under /api/_routes
 router.get('/_routes', (req, res) => {

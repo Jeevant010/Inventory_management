@@ -2,7 +2,7 @@ const Asset = require('../models/asset');
 const TowerType = require('../models/towerType');
 const SubstationType = require('../models/substationType');
 const SKU = require('../models/sku');
-const SKUCompatibility = require('../models/skuCompatibility');
+const SKUCompatibility = require('../models/SkuCompartibility');
 
 async function overview(req, res, next) {
   try {
