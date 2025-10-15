@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const compression = require('compression');
 const mongoose = require('mongoose');
-
+const { notFound, errorHandler } = require('./middleware/error');
 // Import your routes folder instead of inline router
 const routes = require('./routes');
 
@@ -51,7 +51,7 @@ function notFound(req, res) {
 }
 
 function errorHandler(err, req, res, next) {
-  console.error("❌ Server Error:", err);
+  console.error("Server Error:", err);
   res.status(500).json({ error: 'Internal Server Error' });
 }
 
@@ -59,4 +59,4 @@ app.use(notFound);
 app.use(errorHandler);
 
 // ---- Start Server ----
-app.listen(port, () => console.log(`🚀 Server listening on port ${port}`));
+app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));

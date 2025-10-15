@@ -10,38 +10,35 @@ function notFound(req, res, next) {
 // Centralized error handler
 // eslint-disable-next-line no-unused-vars
 function errorHandler(err, _req, res, _next) {
-  let status = err.status || 500;
-  let message = err.message || 'Server Error';
+  // Log minimally to console
+  if (process.env.NODE_ENV !== 'test') {
+    const code = err.code || err.status || '';
+    console.error('❌ Error:', err.name, code, '-', err.message);
+  }
 
-  // Mongoose ValidationError
+  // Validation errors
   if (err instanceof mongoose.Error.ValidationError) {
-    status = 400;
-    message = 'Validation failed';
     const details = Object.values(err.errors).map(e => ({
       field: e.path,
       message: e.message
     }));
-    return res.status(status).json({ error: message, details });
+    return res.status(400).json({ error: 'Validation failed', details });
   }
 
-  // Mongoose CastError (e.g., invalid ObjectId)
+  // Cast errors (e.g., bad ObjectId)
   if (err instanceof mongoose.Error.CastError) {
-    status = 400;
-    message = `Invalid value for ${err.path}`;
-    return res.status(status).json({ error: message });
+    return res.status(400).json({ error: `Invalid value for ${err.path}` });
   }
 
-  // Duplicate key error
+  // Duplicate key errors
   if (err.code === 11000) {
-    status = 409;
     const fields = Object.keys(err.keyPattern || err.keyValue || {});
-    message = `Duplicate value for unique field(s): ${fields.join(', ')}`;
-    return res.status(status).json({ error: message });
+    return res.status(409).json({ error: `Duplicate value for unique field(s): ${fields.join(', ')}` });
   }
 
-  res.status(status).json({
-    error: message
-  });
+  // Default
+  const status = err.status || 500;
+  return res.status(status).json({ error: err.message || 'Internal Server Error' });
 }
 
 module.exports = { notFound, errorHandler };
