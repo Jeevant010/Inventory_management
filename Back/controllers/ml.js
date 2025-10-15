@@ -1,6 +1,6 @@
-const Prediction = require('../models/prediction.model');
-const ModelRun = require('../models/modelRun.model');
-const SKU = require('../models/sku.model');
+const Prediction = require('../models/prediction');
+const ModelRun = require('../models/modelRun');
+const SKU = require('../models/sku');
 
 function linearRegression(x, y) {
   const n = x.length;

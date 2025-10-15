@@ -1,8 +1,8 @@
-const Asset = require('../models/asset.model');
-const TowerType = require('../models/towerType.model');
-const SubstationType = require('../models/substationType.model');
-const SKU = require('../models/sku.model');
-const SKUCompatibility = require('../models/skuCompatibility.model');
+const Asset = require('../models/asset');
+const TowerType = require('../models/towerType');
+const SubstationType = require('../models/substationType');
+const SKU = require('../models/sku');
+const SKUCompatibility = require('../models/skuCompatibility');
 
 async function overview(req, res, next) {
   try {

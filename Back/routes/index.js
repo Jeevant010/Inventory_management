@@ -7,6 +7,11 @@ router.use('/skus', require('./sku'));
 router.use('/sku-compatibilities', require('./skuCompatibility'));
 router.use('/assets', require('./assets'));
 
+
+router.use('/analytics', require('./analytics'));
+router.use('/ml', require('./ml'));
+router.use('/predictions', require('./predictions'));
+
 // Debug: list all registered routes under /api/_routes
 router.get('/_routes', (req, res) => {
   const stack = req.app._router?.stack || [];
