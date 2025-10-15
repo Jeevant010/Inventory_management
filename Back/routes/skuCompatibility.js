@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const ctrl = require('../controllers/skuCompatibility.controller');
+const ctrl = require('../controllers/skuCompatibility');
 const validate = require('../middleware/validate');
 const { objectIdParam, paginationValidators } = require('../validators/common');
-const { createSKUCompatibility, updateSKUCompatibility } = require('../validators/skuCompatibility.validators');
+const { createSKUCompatibility, updateSKUCompatibility } = require('../validators/skuCompatibility');
 
 router.get('/', paginationValidators, validate, ctrl.list);
 router.post('/', createSKUCompatibility, validate, ctrl.create);

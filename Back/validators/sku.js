@@ -1,5 +1,5 @@
 const { body } = require('express-validator');
-const { SKU_CATEGORIES, COMPAT_ASSET_TYPES } = require('../models/sku.model');
+const { SKU_CATEGORIES, COMPAT_ASSET_TYPES } = require('../models/sku');
 
 const createSKU = [
   body('sku_code').isString().trim().notEmpty(),

@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const ctrl = require('../controllers/asset.controller');
+const ctrl = require('../controllers/asset');
 const validate = require('../utils/validate');
 const { objectIdParam, paginationValidators } = require('../validators/common');
-const { createAsset, updateAsset } = require('../validators/asset.validators');
+const { createAsset, updateAsset } = require('../validators/asset');
 
 router.get('/', paginationValidators, validate, ctrl.list);
 router.post('/', createAsset, validate, ctrl.create);

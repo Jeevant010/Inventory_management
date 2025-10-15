@@ -5,7 +5,7 @@ router.use('/tower-types', require('./towerType'));
 router.use('/substation-types', require('./substationType'));
 router.use('/skus', require('./sku'));
 router.use('/sku-compatibilities', require('./skuCompatibility'));
-router.use('/assets', require('./asset'));
+router.use('/assets', require('./assets'));
 
 // Debug: list all registered routes under /api/_routes
 router.get('/_routes', (req, res) => {

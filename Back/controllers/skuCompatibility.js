@@ -1,11 +1,11 @@
-const SKUCompatibility = require('../models/skuCompatibility');
+const SKUCompatibility = require('../models/SkuCompartibility');
 const {
   buildListHandler,
   buildGetHandler,
   buildCreateHandler,
   buildUpdateHandler,
   buildDeleteHandler
-} = require('./base.controller');
+} = require('./base');
 
 module.exports = {
   list: buildListHandler(SKUCompatibility, '-createdAt'),
