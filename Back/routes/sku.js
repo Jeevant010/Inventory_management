@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const ctrl = require('../controllers/sku.controller');
+const ctrl = require('../controllers/sku');
 const validate = require('../middleware/validate');
 const { objectIdParam, paginationValidators } = require('../validators/common');
-const { createSKU, updateSKU } = require('../validators/sku.validators');
+const { createSKU, updateSKU } = require('../validators/sku');
 
 router.get('/', paginationValidators, validate, ctrl.list);
 router.post('/', createSKU, validate, ctrl.create);

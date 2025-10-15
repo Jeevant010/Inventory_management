@@ -1,25 +1,16 @@
-const { body } = require('express-validator');
-const { SKU_CATEGORIES, COMPAT_ASSET_TYPES } = require('../models/sku');
+const { param, query } = require('express-validator');
+const mongoose = require('mongoose');
 
-const createSKU = [
-  body('sku_code').isString().trim().notEmpty(),
-  body('description').isString().trim().notEmpty(),
-  body('category').isIn(SKU_CATEGORIES),
-  body('compatible_asset_type').isIn(COMPAT_ASSET_TYPES),
-  body('compatible_type_codes').optional().isArray(),
-  body('compatible_type_codes.*').optional().isString(),
-  body('voltage_min_kv').optional().isFloat({ gt: 0 }).toFloat(),
-  body('voltage_max_kv').optional().isFloat({ gt: 0 }).toFloat(),
-  body('specs').optional().isObject(),
-  body('uom').optional().isString(),
-  body('serialization_required').optional().isBoolean(),
-  body('lot_controlled').optional().isBoolean(),
-  body('reorder_point').optional().isInt({ min: 0 }).toInt(),
-  body('min_level').optional().isInt({ min: 0 }).toInt(),
-  body('max_level').optional().isInt({ min: 0 }).toInt(),
-  body('preferred_vendor_id').optional().isString().trim()
+const objectIdParam = (name = 'id') =>
+  param(name)
+    .custom(val => mongoose.isValidObjectId(val))
+    .withMessage('Invalid ObjectId');
+
+const paginationValidators = [
+  query('page').optional().isInt({ min: 1 }).toInt(),
+  query('limit').optional().isInt({ min: 1, max: 200 }).toInt(),
+  query('sort').optional().isString(),
+  query('order').optional().isIn(['asc', 'desc'])
 ];
 
-const updateSKU = createSKU.map(rule => rule.optional({ nullable: true }));
-
-module.exports = { createSKU, updateSKU };
+module.exports = { objectIdParam, paginationValidators };

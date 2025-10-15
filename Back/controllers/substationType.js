@@ -5,7 +5,7 @@ const {
   buildCreateHandler,
   buildUpdateHandler,
   buildDeleteHandler
-} = require('./base.controller');
+} = require('./base');
 
 module.exports = {
   list: buildListHandler(SubstationType, 'code'),

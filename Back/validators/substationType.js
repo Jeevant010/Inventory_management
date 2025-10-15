@@ -1,5 +1,5 @@
 const { body } = require('express-validator');
-const { PURPOSES, TECHNOLOGIES, BUSBAR_SCHEMES } = require('../models/substationType.model');
+const { PURPOSES, TECHNOLOGIES, BUSBAR_SCHEMES } = require('../models/substationType');
 
 const createSubstationType = [
   body('code').isString().trim().notEmpty(),

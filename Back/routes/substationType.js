@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const ctrl = require('../controllers/substationType.controller');
+const ctrl = require('../controllers/substationType');
 const validate = require('../middleware/validate');
 const { objectIdParam, paginationValidators } = require('../validators/common');
-const { createSubstationType, updateSubstationType } = require('../validators/substationType.validators');
+const { createSubstationType, updateSubstationType } = require('../validators/substationType');
 
 router.get('/', paginationValidators, validate, ctrl.list);
 router.post('/', createSubstationType, validate, ctrl.create);
