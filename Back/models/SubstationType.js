@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { Schema, model } = mongoose;
+const { Schema } = mongoose;
 
 const PURPOSES = ['STEP_UP', 'STEP_DOWN', 'SWITCHING', 'DISTRIBUTION'];
 const TECHNOLOGIES = ['AIS', 'GIS', 'HYBRID', 'RMU', 'PAD', 'MOBILE'];
@@ -7,7 +7,7 @@ const BUSBAR_SCHEMES = ['SINGLE', 'DOUBLE', 'RING', 'BREAKER_AND_A_HALF', 'MESH'
 
 const SubstationTypeSchema = new Schema(
   {
-    code: { type: String, required: true, unique: true, index: true }, // e.g., AIS-STEPDOWN-132/33
+    code: { type: String, required: true, unique: true, index: true },
     purpose: { type: String, enum: PURPOSES, required: true },
     technology: { type: String, enum: TECHNOLOGIES, required: true },
     busbar_scheme: { type: String, enum: BUSBAR_SCHEMES },
@@ -23,7 +23,9 @@ const SubstationTypeSchema = new Schema(
 );
 
 SubstationTypeSchema.index({ technology: 1, purpose: 1, voltage_high_kv: 1, voltage_low_kv: 1 });
-module.exports = model('SubstationType', SubstationTypeSchema);
+
+const SubstationType = mongoose.models.SubstationType || mongoose.model('SubstationType', SubstationTypeSchema);
+module.exports = SubstationType;
 module.exports.PURPOSES = PURPOSES;
 module.exports.TECHNOLOGIES = TECHNOLOGIES;
 module.exports.BUSBAR_SCHEMES = BUSBAR_SCHEMES;

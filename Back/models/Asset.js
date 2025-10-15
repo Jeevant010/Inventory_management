@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { Schema, model } = mongoose;
+const { Schema } = mongoose;
 
 const ASSET_TYPES = ['TOWER', 'SUBSTATION', 'TRANSFORMER', 'LINE_BAY'];
 
@@ -26,5 +26,7 @@ const AssetSchema = new Schema(
 );
 
 AssetSchema.index({ type_code: 1 });
-module.exports = model('Asset', AssetSchema);
+
+const Asset = mongoose.models.Asset || mongoose.model('Asset', AssetSchema);
+module.exports = Asset;
 module.exports.ASSET_TYPES = ASSET_TYPES;

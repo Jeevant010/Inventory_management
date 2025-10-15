@@ -6,7 +6,7 @@ const objectIdParam = (name = 'id') =>
     .custom(val => mongoose.isValidObjectId(val))
     .withMessage('Invalid ObjectId');
 
-// Remove the hard max on limit; clamp in controllers instead
+    
 const paginationValidators = [
   query('page').optional().isInt({ min: 1 }).toInt(),
   query('limit').optional().isInt({ min: 1 }).toInt(),

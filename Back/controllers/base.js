@@ -11,10 +11,8 @@ function buildListHandler(Model, defaultSort = '-createdAt') {
     const order = req.query.order;
     const parsedSort = order ? `${order === 'desc' ? '-' : ''}${sortField}` : sortField;
 
-    // Remove control params to form filters
+    // Build filters (exclude control params)
     const { page: _p, limit: _l, sort: _s, order: _o, ...filters } = req.query;
-
-    // Clean empty filters
     Object.keys(filters).forEach(k => {
       if (filters[k] === '' || filters[k] === undefined) delete filters[k];
     });
@@ -25,13 +23,7 @@ function buildListHandler(Model, defaultSort = '-createdAt') {
       Model.countDocuments(filters)
     ]);
 
-    res.json({
-      data: items,
-      page,
-      limit,
-      total,
-      totalPages: Math.ceil(total / limit)
-    });
+    res.json({ data: items, page, limit, total, totalPages: Math.ceil(total / limit) });
   });
 }
 

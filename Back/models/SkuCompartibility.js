@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
-const { Schema, model, Types } = mongoose;
+const { Schema, Types } = mongoose;
 
 const SKUCompatibilitySchema = new Schema(
   {
     sku: { type: Types.ObjectId, ref: 'SKU', required: true, index: true },
-    type_code: { type: String, required: true, index: true }, // TowerType.code or SubstationType.code
-    constraints: {
-      type: Map,
-      of: String
-      // e.g., circuit_requirement: "DOUBLE", min_kv: "220", technology: "GIS"
-    }
+    type_code: { type: String, required: true, index: true },
+    constraints: { type: Map, of: String }
   },
   { timestamps: true }
 );
 
 SKUCompatibilitySchema.index({ sku: 1, type_code: 1 }, { unique: true });
-module.exports = model('SKUCompatibility', SKUCompatibilitySchema);
+
+const SKUCompatibility = mongoose.models.SKUCompatibility || mongoose.model('SKUCompatibility', SKUCompatibilitySchema);
+module.exports = SKUCompatibility;

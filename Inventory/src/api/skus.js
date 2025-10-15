@@ -1,7 +1,10 @@
 import client from './client';
 import { toQuery } from './helpers';
 
-export async function listSKUs({ page=1, limit=10, search='' } = {}) {
+// Make the list limit configurable from .env, default 200
+const MAX_LIST_LIMIT = Number(import.meta.env.VITE_LIST_LIMIT || 200);
+
+export async function listSKUs({ page=1, limit=MAX_LIST_LIMIT, search='' } = {}) {
   const q = toQuery({ page, limit, sku_code: search });
   const res = await client.get(`/skus${q}`);
   return res.data;

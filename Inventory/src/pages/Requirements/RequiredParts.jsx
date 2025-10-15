@@ -8,14 +8,18 @@ export default function RequiredParts() {
   const [items, setItems] = useState([]);
   const [err, setErr] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [hint, setHint] = useState('');
 
   async function onSearch(e) {
     e.preventDefault();
-    setLoading(true); setErr(null);
+    setErr(null); setHint('');
+    if (!typeCode.trim()) { setErr('Enter a type code to search'); return; }
+    setLoading(true);
     try {
       const res = await getRequiredParts({ asset_type: assetType, type_code: typeCode.trim() });
       setItems(res.skus || []);
-    } catch (e2) { setErr(e2); }
+      if (res.hint) setHint(res.hint);
+    } catch (e2) { setErr(e2.message || String(e2)); }
     finally { setLoading(false); }
   }
 
@@ -39,6 +43,9 @@ export default function RequiredParts() {
           <button className="btn accent" type="submit" disabled={loading}>{loading ? 'Searching...' : 'Find Parts'}</button>
         </div>
       </form>
+
+      {hint && <div className="label" style={{marginTop:'0.5rem'}}>{hint}</div>}
+
       <div className="panel" style={{marginTop:'1rem'}}>
         <table className="table">
           <thead><tr><th>SKU Code</th><th>Description</th><th>Category</th><th>UOM</th></tr></thead>

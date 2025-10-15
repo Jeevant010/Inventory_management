@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { Schema, model } = mongoose;
+const { Schema } = mongoose;
 
 const STRUCTURE_FORMS = ['LATTICE', 'MONOPOLE', 'GUYED', 'CONCRETE_POLE', 'WOOD_POLE'];
 const TOWER_FUNCTIONS = ['SUSPENSION', 'TENSION', 'TERMINAL', 'TRANSPOSITION', 'CROSSING'];
@@ -12,16 +12,18 @@ const TowerTypeSchema = new Schema(
     circuits_supported: { type: Number, enum: [1, 2], default: 1 },
     voltage_min_kv: { type: Number, required: true },
     voltage_max_kv: { type: Number, required: true },
-    height_class: { type: String }, // optional
+    height_class: { type: String },
     material_grade: { type: String },
     foundation_type: { type: String },
-    design_code: { type: String }, // wind/ice loading standard
+    design_code: { type: String },
     notes: { type: String }
   },
   { timestamps: true }
 );
 
 TowerTypeSchema.index({ voltage_min_kv: 1, voltage_max_kv: 1 });
-module.exports = model('TowerType', TowerTypeSchema);
+
+const TowerType = mongoose.models.TowerType || mongoose.model('TowerType', TowerTypeSchema);
+module.exports = TowerType;
 module.exports.STRUCTURE_FORMS = STRUCTURE_FORMS;
 module.exports.TOWER_FUNCTIONS = TOWER_FUNCTIONS;

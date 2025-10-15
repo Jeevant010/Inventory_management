@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { Schema, model, Types } = mongoose;
+const { Schema, Types } = mongoose;
 
 const SKU_CATEGORIES = [
   'HARDWARE', 'INSULATOR', 'BREAKER', 'CT', 'PT', 'TRANSFORMER', 'RELAY', 'STEEL_MEMBER', 'BOLT', 'CABLE'
@@ -22,12 +22,14 @@ const SKUSchema = new Schema(
     reorder_point: { type: Number, default: 0 },
     min_level: { type: Number, default: 0 },
     max_level: { type: Number, default: 0 },
-    preferred_vendor_id: { type: Types.ObjectId, ref: 'Vendor' } 
+    preferred_vendor_id: { type: Types.ObjectId, ref: 'Vendor' }
   },
   { timestamps: true }
 );
 
 SKUSchema.index({ category: 1, compatible_asset_type: 1 });
-module.exports = model('SKU', SKUSchema);
+
+const SKU = mongoose.models.SKU || mongoose.model('SKU', SKUSchema);
+module.exports = SKU;
 module.exports.SKU_CATEGORIES = SKU_CATEGORIES;
 module.exports.COMPAT_ASSET_TYPES = COMPAT_ASSET_TYPES;
