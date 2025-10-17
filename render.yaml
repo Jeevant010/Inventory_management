@@ -5,4 +5,3 @@ services:
     plan: free
     buildCommand: cd Back && npm install
     startCommand: cd Back && npm start
-    rootDir: Back
