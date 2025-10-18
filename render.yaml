@@ -4,5 +4,5 @@ services:
     env: node
     plan: free
     rootDir: Back
-    buildCommand: cd Back && npm install
+    buildCommand: cd Back && npm install && npm start
     startCommand: cd Back && npm start
