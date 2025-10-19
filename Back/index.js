@@ -1,15 +1,14 @@
-const express = require('express');
 require('dotenv').config();
+const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const compression = require('compression');
 const mongoose = require('mongoose');
 const { notFound, errorHandler } = require('./middleware/error');
-// Import your routes folder instead of inline router
 const routes = require('./routes');
 const sanitizeEmptyStrings = require('./middleware/sanitize');
 
-const port = 4000;
+const PORT = process.env.PORT || 4000;
 const app = express();
 
 // ---- Database Connection ----
@@ -21,7 +20,7 @@ mongoose.connect(process.env.MONGO_URI)
 
     try {
       await db.collection('users').dropIndex('phone_1');
-      console.log(" Dropped existing index 'phone_1'");
+      console.log("Dropped existing index 'phone_1'");
     } catch (err) {
       console.log("ℹ No existing 'phone_1' index to drop.");
     }
@@ -40,16 +39,18 @@ app.use(cors());
 app.use(compression());
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
+app.use(sanitizeEmptyStrings); // sanitize before routes
 
 // ---- Routes ----
-app.use('/api', routes); // Now mounts your real routers
+app.use('/api', routes);
 
-app.get("/", (req, res) => res.send("It's here!"));
+app.get('/', (req, res) => res.send("It's here!"));
 
-
+// ---- Error handlers (after routes) ----
 app.use(notFound);
 app.use(errorHandler);
-app.use(sanitizeEmptyStrings);
 
 // ---- Start Server ----
-app.listen(port, "0.0.0.0", () => console.log(`Server listening on port http://localhost:${port}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server listening on port ${PORT}`);
+});
