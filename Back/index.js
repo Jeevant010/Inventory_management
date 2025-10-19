@@ -9,7 +9,7 @@ const { notFound, errorHandler } = require('./middleware/error');
 const routes = require('./routes');
 const sanitizeEmptyStrings = require('./middleware/sanitize');
 
-const port = process.env.PORT || 4000;
+const port = 4000;
 const app = express();
 
 // ---- Database Connection ----
@@ -44,7 +44,7 @@ app.use(express.urlencoded({ extended: true }));
 // ---- Routes ----
 app.use('/api', routes); // Now mounts your real routers
 
-app.get("/", (_req, res) => res.send("It's here!"));
+app.get("/", (req, res) => res.send("It's here!"));
 
 
 app.use(notFound);
