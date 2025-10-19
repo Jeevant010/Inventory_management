@@ -3,6 +3,6 @@ services:
     name: backend-service
     env: node
     plan: free
-    root: back
+    root: Back
     buildCommand: npm install
     startCommand: npm start
