@@ -9,18 +9,19 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jeevant010/Inventory_management.git"
-  },  
+  },
   "license": "ISC",
   "author": "Jeevant",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node index.js",
+    "start": "node index.js",
     "build": "echo 'No build step needed'"
   },
   "dependencies": {
     "compression": "^1.7.5",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
