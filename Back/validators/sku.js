@@ -1,6 +1,6 @@
 const { body } = require('express-validator');
 const mongoose = require('mongoose');
-const { SKU_CATEGORIES, COMPAT_ASSET_TYPES } = require('../models/sku');
+const { SKU_CATEGORIES, COMPAT_ASSET_TYPES } = require('../models/Sku');
 
 const objectId = (val) => mongoose.isValidObjectId(val);
 
