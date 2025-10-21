@@ -13,6 +13,7 @@
   "license": "ISC",
   "author": "Jeevant",
   "type": "commonjs",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
@@ -28,10 +29,5 @@
     "helmet": "^7.1.0",
     "mongoose": "^8.7.0",
     "morgan": "^1.10.0"
-  },
-  "engines": {
-    "node": "18.x"
-  },
-  "author": "Jeevant",
-  "license": "ISC"
+  }
 }

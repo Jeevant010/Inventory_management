@@ -58,8 +58,6 @@ async function init() {
       // Connect to MongoDB
       await mongoose.connect(process.env.MONGO_URI, {
         // options - Mongoose 6+ usually works fine without these, but they're harmless
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
       });
       console.log('Connected to MongoDB');
 
