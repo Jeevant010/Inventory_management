@@ -1,4 +1,4 @@
-const TowerType = require('../models/towerType');
+const TowerType = require('../models/TowerType');
 const {
   buildListHandler,
   buildGetHandler,

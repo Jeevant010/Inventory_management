@@ -6,8 +6,6 @@ router.use('/substation-types', require('./substationType'));
 router.use('/skus', require('./sku'));
 router.use('/sku-compatibilities', require('./skuCompatibility'));
 router.use('/assets', require('./assets'));
-
-
 router.use('/analytics', require('./analytics'));
 router.use('/ml', require('./ml'));
 router.use('/predictions', require('./prediction'));
