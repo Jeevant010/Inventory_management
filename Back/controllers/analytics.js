@@ -1,5 +1,5 @@
 const Asset = require('../models/Asset');
-const TowerType = require('../models/TowerType');
+const TowerType = require('../models/TowerTypes');
 const SubstationType = require('../models/SubstationType');
 const SKU = require('../models/Sku');
 const SKUCompatibility = require('../models/SkuCompartibility');
