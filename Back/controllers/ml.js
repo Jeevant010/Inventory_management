@@ -1,4 +1,4 @@
-const Prediction = require('../models/Prediction');
+const Prediction = require('../models/Prediction')
 const ModelRun = require('../models/ModelRun');
 const SKU = require('../models/Sku');
 
