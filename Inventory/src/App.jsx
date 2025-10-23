@@ -41,7 +41,7 @@ export default function App() {
     >
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="*" element={<Dashboard />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/tower-types" element={<TowerTypeList />} />
